@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Hla-98-Zzj" customClass="SearchBookViewCell" customModule="Picks" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hla-98-Zzj" id="QzZ-WH-hLm">
+                <frame key="frameInset" width="375" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M4z-HP-01Z" customClass="PickImageView" customModule="Picks" customModuleProvider="target">
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="M4z-HP-01Z" secondAttribute="height" multiplier="1:1" id="ZPz-pQ-UVB"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnc-XK-tcb">
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="M4z-HP-01Z" secondAttribute="bottom" id="3qt-Qa-Agw"/>
+                    <constraint firstItem="M4z-HP-01Z" firstAttribute="leading" secondItem="QzZ-WH-hLm" secondAttribute="leading" id="4sx-Fw-ghh"/>
+                    <constraint firstItem="M4z-HP-01Z" firstAttribute="top" secondItem="QzZ-WH-hLm" secondAttribute="top" id="9lk-4D-M3t"/>
+                    <constraint firstItem="gnc-XK-tcb" firstAttribute="leading" secondItem="M4z-HP-01Z" secondAttribute="trailing" constant="20" id="You-QZ-aBF"/>
+                    <constraint firstAttribute="trailing" secondItem="gnc-XK-tcb" secondAttribute="trailing" constant="20" id="h8i-Jm-g7A"/>
+                    <constraint firstItem="gnc-XK-tcb" firstAttribute="top" secondItem="QzZ-WH-hLm" secondAttribute="top" id="ha1-Lm-F0c"/>
+                    <constraint firstAttribute="bottom" secondItem="gnc-XK-tcb" secondAttribute="bottom" id="kvH-zO-Tzk"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="thumbnailView" destination="M4z-HP-01Z" id="RIa-I2-8nb"/>
+                <outlet property="title" destination="gnc-XK-tcb" id="RDL-Gh-cGA"/>
+            </connections>
+            <point key="canvasLocation" x="-6" y="-50"/>
+        </tableViewCell>
+    </objects>
+</document>

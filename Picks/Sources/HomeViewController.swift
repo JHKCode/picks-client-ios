@@ -48,7 +48,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UITableViewData
     
     
     private func setupTableView() {
-        tableView.register(SearchBookViewCell)
+        tableView.register(SearchBookViewCell.self)
     }
     
     
@@ -84,7 +84,10 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UITableViewData
         
         let book = searchManager.books.items[indexPath.row]
         cell.title.text = book.title
-        cell.thumbnailView.load(imageURL: URL(string: book.imageURI)!)
+        
+        if let url = URL(string: book.imageURI) {
+            cell.thumbnailView.load(imageURL: url)
+        }
         
         return cell
     }
@@ -94,12 +97,12 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UITableViewData
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let addPickVC = UIViewController.make() as AddPickViewController
+        let savePickVC = UIViewController.make() as SavePickViewController
         let pickItem = searchManager.books.items[indexPath.row]
         
-        addPickVC.item = pickItem
+        savePickVC.item = pickItem
         
-        self.navigationController?.pushViewController(addPickVC, animated: true)
+        self.navigationController?.pushViewController(savePickVC, animated: true)
         
         tableView.deselectRow(at: indexPath, animated: false)
     }

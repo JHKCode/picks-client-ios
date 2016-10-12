@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gs4-dJ-3oh">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -60,7 +59,7 @@
                                     <outlet property="delegate" destination="aaD-gh-mOv" id="UH7-zc-ble"/>
                                 </connections>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XmO-af-ukg">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XmO-af-ukg">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="aaD-gh-mOv" id="wao-4u-KEL"/>
@@ -89,10 +88,10 @@
             </objects>
             <point key="canvasLocation" x="-55" y="821"/>
         </scene>
-        <!--Add Pick View Controller-->
+        <!--Save Pick View Controller-->
         <scene sceneID="kSQ-kN-pQA">
             <objects>
-                <viewController storyboardIdentifier="AddPickViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uYH-Jq-Tcw" customClass="AddPickViewController" customModule="Picks" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SavePickViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uYH-Jq-Tcw" customClass="SavePickViewController" customModule="Picks" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rkE-zR-3cL"/>
                         <viewControllerLayoutGuide type="bottom" id="DUk-Vg-xba"/>
@@ -103,10 +102,10 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lrQ-bX-oCN" customClass="PickImageView" customModule="Picks" customModuleProvider="target">
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="lrQ-bX-oCN" secondAttribute="height" multiplier="1:1" id="o5T-Zc-2vc"/>
+                                    <constraint firstAttribute="width" secondItem="lrQ-bX-oCN" secondAttribute="height" multiplier="3:4" id="o5T-Zc-2vc"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2o9-LB-flV">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2o9-LB-flV">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -114,23 +113,49 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MNX-t8-RIr">
                                 <state key="normal" title="Button"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WfZ-kO-6Z9">
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HtR-Jj-KXh">
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2UE-Gy-f9v">
+                                <frame key="frameInset" minX="16" minY="189" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="2o9-LB-flV" firstAttribute="width" secondItem="lrQ-bX-oCN" secondAttribute="width" multiplier="3" id="73j-2X-hL1"/>
+                            <constraint firstItem="2o9-LB-flV" firstAttribute="width" secondItem="lrQ-bX-oCN" secondAttribute="width" multiplier="2" id="73j-2X-hL1"/>
+                            <constraint firstItem="WfZ-kO-6Z9" firstAttribute="top" secondItem="2o9-LB-flV" secondAttribute="bottom" constant="7.5" id="OpX-jb-uvc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2UE-Gy-f9v" secondAttribute="trailing" constant="301" id="Tan-Cp-CLt"/>
                             <constraint firstAttribute="leadingMargin" secondItem="lrQ-bX-oCN" secondAttribute="leading" id="UNl-5H-17x"/>
                             <constraint firstItem="MNX-t8-RIr" firstAttribute="leading" secondItem="6So-MP-QxU" secondAttribute="leadingMargin" id="Vsx-n9-MQM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="HtR-Jj-KXh" secondAttribute="trailing" constant="10" id="YQX-qp-rDd"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="2UE-Gy-f9v" secondAttribute="leading" id="YXc-Zd-sgT"/>
+                            <constraint firstItem="HtR-Jj-KXh" firstAttribute="leading" secondItem="lrQ-bX-oCN" secondAttribute="trailing" constant="9.5" id="ZBR-b9-tC9"/>
                             <constraint firstItem="2o9-LB-flV" firstAttribute="leading" secondItem="lrQ-bX-oCN" secondAttribute="trailing" constant="10" id="eay-dV-R6U"/>
                             <constraint firstItem="lrQ-bX-oCN" firstAttribute="top" secondItem="rkE-zR-3cL" secondAttribute="bottom" constant="8" id="es5-M6-KY0"/>
+                            <constraint firstItem="WfZ-kO-6Z9" firstAttribute="leading" secondItem="lrQ-bX-oCN" secondAttribute="trailing" constant="9.5" id="gcs-wR-O9k"/>
                             <constraint firstAttribute="trailingMargin" secondItem="2o9-LB-flV" secondAttribute="trailing" constant="10" id="s1y-dZ-gDj"/>
+                            <constraint firstItem="HtR-Jj-KXh" firstAttribute="top" secondItem="WfZ-kO-6Z9" secondAttribute="bottom" constant="8" id="soY-BP-YnQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="MNX-t8-RIr" secondAttribute="trailing" id="srN-Ti-iv2"/>
                             <constraint firstItem="DUk-Vg-xba" firstAttribute="top" secondItem="MNX-t8-RIr" secondAttribute="bottom" constant="10" id="wPS-DZ-0QV"/>
                             <constraint firstItem="2o9-LB-flV" firstAttribute="top" secondItem="rkE-zR-3cL" secondAttribute="bottom" constant="8" id="xrU-bx-rUB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WfZ-kO-6Z9" secondAttribute="trailing" constant="10" id="xzm-CU-ITB"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="pickImageView" destination="lrQ-bX-oCN" id="WEH-LY-QLr"/>
-                        <outlet property="pickTitle" destination="2o9-LB-flV" id="QNp-lo-MOF"/>
+                        <outlet property="pickCreatorLabel" destination="WfZ-kO-6Z9" id="EHX-VP-dNP"/>
+                        <outlet property="pickDateLabel" destination="HtR-Jj-KXh" id="00z-ww-tvn"/>
+                        <outlet property="pickImageView" destination="lrQ-bX-oCN" id="Aef-3r-iTf"/>
+                        <outlet property="pickTitleLabel" destination="2o9-LB-flV" id="m7h-B8-75r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tkD-Ih-T3q" userLabel="First Responder" sceneMemberID="firstResponder"/>

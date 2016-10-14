@@ -9,6 +9,11 @@
 import Foundation
 
 
+protocol InitializableWithXML {
+    init?(xmlElement: XMLElement)
+}
+
+
 class XMLDoc {
     // constants
     let maxDataSize: Int = 0x100000 // 1MB

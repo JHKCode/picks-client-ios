@@ -53,7 +53,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UITableViewData
     
     
     private func setupNotification() {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "BookSearchDidFinish"), object: nil, queue: nil) { (noti: Notification) in
+        NotificationCenter.default.addObserver(forName: SearchManager.SearchDidFinishNotificationName, object: nil, queue: nil) { (noti: Notification) in
             self.tableView.reloadData()
         }
     }
@@ -65,27 +65,36 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UITableViewData
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("Keyword: \(searchBar.text)")
         
-        if let keyword = searchBar.text {
-            searchManager.search(keyword: keyword)
+        guard let keyword = searchBar.text, keyword.isEmpty == false else {
+            return
+        }
+
+        if let category = searchBar.scopeButtonTitles?[searchBar.selectedScopeButtonIndex] {
+            searchManager.search(keyword: keyword, category: category)
         }
     }
     
     
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        self.searchBarSearchButtonClicked(searchBar)
+    }
+    
+
     // MARK: UITableViewDataSource
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchManager.books.count
+        return searchManager.items.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(forIndexPath: indexPath) as SearchBookViewCell
         
-        let book = searchManager.books.items[indexPath.row]
-        cell.title.text = book.title
+        let item = searchManager.items[indexPath.row]
+        cell.title.text = item.title
         
-        if let url = URL(string: book.imageURI) {
+        if let url = URL(string: item.imageURI) {
             cell.thumbnailView.load(imageURL: url)
         }
         
@@ -98,7 +107,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let savePickVC = UIViewController.make() as SavePickViewController
-        let pickItem = searchManager.books.items[indexPath.row]
+        let pickItem = searchManager.items[indexPath.row]
         
         savePickVC.item = pickItem
         

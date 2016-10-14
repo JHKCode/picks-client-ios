@@ -10,31 +10,13 @@ import Foundation
 import Security
 
 
-struct Books {
-    var items = Array<Book>()
-    var total: Int = 0
-    var count: Int {
-        return items.count
-    }
-    
-    func description() {
-        print("book total: \(total)")
-        print("book count: \(count)")
-        
-        for item in items {
-            item.description()
-        }
-    }
-}
-
-
-extension Book {
+extension Book: InitializableWithXML {
     init?(xmlElement item: XMLElement) {
         guard let title = item["title"]?.first?.value else {
             return nil
         }
         
-        guard let imgURI = item["image"]?.first?.value else {
+        guard let imgURI = item["image"]?.first?.value, imgURI.isEmpty == false else {
             return nil
         }
 
@@ -77,6 +59,47 @@ extension Book {
 }
 
 
+extension Film: InitializableWithXML {
+    init?(xmlElement item: XMLElement) {
+        guard let title = item["title"]?.first?.value else {
+            return nil
+        }
+        
+        guard let imgURI = item["image"]?.first?.value, imgURI.isEmpty == false else {
+            return nil
+        }
+        
+        guard let director = item["director"]?.first?.value else {
+            return nil
+        }
+        
+        guard let date = item["pubDate"]?.first?.value else {
+            return nil
+        }
+        
+        guard let actor = item["actor"]?.first?.value else {
+            return nil
+        }
+        
+        
+        self.title = title
+        self.imageURI = imgURI
+        self.creator = director
+        self.cast = actor
+        self.desc = ""
+        
+        // convert date string to Date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMdd"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        self.date = dateFormatter.date(from: date) ?? Date()
+        
+        self.type = PickItemType.Film
+        self.id = String("f" + title + date).SHA256()
+    }
+}
+
+
 extension String {
     func SHA256() -> String {
         var digestData = Data(count: Int(CC_SHA256_DIGEST_LENGTH))
@@ -98,15 +121,18 @@ extension String {
 
 
 class SearchManager {
-    var bookAPI: SearchBookAPI?
-    var books: Books
+    static let SearchDidFinishNotificationName = NSNotification.Name(rawValue: "SearchDidFinish")
+    
+    var fetchAPI: FetchAPI?
+    var items = Array<PickItem>()
+//    var books = Array<Book>()
+//    var films = Array<Film>()
     
     init () {
-        books = Books()
     }
     
     
-    func createBooks(data: Data) -> Books? {
+    func createPickItems<T: InitializableWithXML>(data: Data) -> Array<T>? {
         guard let root = XMLDoc(data: data).rootElement else {
             return nil
         }
@@ -117,18 +143,7 @@ class SearchManager {
             return nil
         }
         
-        guard let total = channel["total"]?.first else {
-            return nil
-        }
-
-        
-        var books = Books()
-        var bookItems = Array<Book>()
-        
-        // total
-        if let totalCount = Int(total.value) {
-            books.total = totalCount
-        }
+        var pickItems = Array<T>()
         
         
         // items
@@ -137,40 +152,59 @@ class SearchManager {
         }
         
         for item in items {
-            if let book = Book(xmlElement: item) {
-                bookItems.append(book)
+            if let item = T(xmlElement: item) {
+                pickItems.append(item)
             }
         }
+
         
-        books.items = bookItems
-        
-        
-        return books
+        return pickItems
     }
     
     
-    func search(keyword: String) {
-        bookAPI = SearchBookAPI(keyword: keyword)
-        bookAPI?.fetch(completionHandler: { (data: Data?, error: Error?) in
-            guard let bookData = data else {
-                return
+    func search(keyword: String, category: String) {
+        // clear previous results
+        self.items.removeAll()
+        
+        if category == "Book" {
+            fetchAPI = SearchBookAPI(keyword: keyword)
+            fetchAPI?.completionHandler = { (data: Data?, error: Error?) in
+                if data == nil || data?.count == 0 {
+                    return
+                }
+                
+                
+                if let searchItems: Array<Book> = self.createPickItems(data: data!) {
+                    self.items = searchItems
+                }
+                
+                
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: SearchManager.SearchDidFinishNotificationName, object: self)
+                }
             }
-            
-            guard let newBooks = self.createBooks(data: bookData) else {
-                return
+        }
+        else {
+            fetchAPI = SearchFilmAPI(keyword: keyword)
+            fetchAPI?.completionHandler = { (data: Data?, error: Error?) in
+                if data == nil || data?.count == 0 {
+                    return
+                }
+                
+                
+                if let searchItems: Array<Film> = self.createPickItems(data: data!) {
+                    self.items = searchItems
+                }
+                
+                
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: SearchManager.SearchDidFinishNotificationName, object: self)
+                }
             }
-            
-            if self.books.total == 0 {
-                self.books.total = newBooks.total
-            }
-            
-            self.books.items.append(contentsOf: newBooks.items)
-            self.books.description()
-            
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "BookSearchDidFinish"), object: self)
-            }
-        })
+        }
+        
+        
+        _ = fetchAPI?.fetch()
     }
 }
 

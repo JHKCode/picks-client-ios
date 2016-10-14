@@ -19,6 +19,11 @@ class SavePickViewController: UIViewController {
     var item: PickItem?
     
     
+    deinit {
+        print("deinit at SavePickViewController")
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

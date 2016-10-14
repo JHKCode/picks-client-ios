@@ -53,8 +53,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="RoU-72-4Xh">
-                                <textInputTraits key="textInputTraits"/>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" showsScopeBar="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RoU-72-4Xh">
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                <scopeButtonTitles>
+                                    <string>Book</string>
+                                    <string>Film</string>
+                                </scopeButtonTitles>
                                 <connections>
                                     <outlet property="delegate" destination="aaD-gh-mOv" id="UH7-zc-ble"/>
                                 </connections>
@@ -69,13 +74,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="RoU-72-4Xh" firstAttribute="leading" secondItem="wlN-BI-6kK" secondAttribute="leading" id="J9b-6O-YK1"/>
+                            <constraint firstItem="RoU-72-4Xh" firstAttribute="leading" secondItem="wlN-BI-6kK" secondAttribute="leadingMargin" id="4cM-ks-Rfi"/>
+                            <constraint firstItem="RoU-72-4Xh" firstAttribute="top" secondItem="Hxy-Ek-Gpe" secondAttribute="bottom" id="CHf-HI-qM1"/>
                             <constraint firstAttribute="trailingMargin" secondItem="XmO-af-ukg" secondAttribute="trailing" id="Qkv-aU-lFg"/>
-                            <constraint firstItem="RoU-72-4Xh" firstAttribute="top" secondItem="Hxy-Ek-Gpe" secondAttribute="bottom" id="Yyz-9Z-Maq"/>
-                            <constraint firstItem="XmO-af-ukg" firstAttribute="top" secondItem="RoU-72-4Xh" secondAttribute="bottom" id="eBt-Qo-ohU"/>
-                            <constraint firstAttribute="trailing" secondItem="RoU-72-4Xh" secondAttribute="trailing" id="fmM-Ea-4ol"/>
+                            <constraint firstItem="RoU-72-4Xh" firstAttribute="trailing" secondItem="wlN-BI-6kK" secondAttribute="trailingMargin" id="fmM-Ea-4ol"/>
                             <constraint firstItem="EA4-B6-JEQ" firstAttribute="top" secondItem="XmO-af-ukg" secondAttribute="bottom" id="kod-PX-285"/>
                             <constraint firstItem="XmO-af-ukg" firstAttribute="leading" secondItem="wlN-BI-6kK" secondAttribute="leadingMargin" id="ndA-9Y-hy5"/>
+                            <constraint firstItem="XmO-af-ukg" firstAttribute="top" secondItem="RoU-72-4Xh" secondAttribute="bottom" constant="10" id="wM1-me-3ON"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="CXI-fL-seT"/>
@@ -86,7 +91,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bn7-li-XSr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-55" y="821"/>
+            <point key="canvasLocation" x="-55.200000000000003" y="820.83958020989508"/>
         </scene>
         <!--Save Pick View Controller-->
         <scene sceneID="kSQ-kN-pQA">
@@ -123,22 +128,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2UE-Gy-f9v">
-                                <frame key="frameInset" minX="16" minY="189" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="2o9-LB-flV" firstAttribute="width" secondItem="lrQ-bX-oCN" secondAttribute="width" multiplier="2" id="73j-2X-hL1"/>
                             <constraint firstItem="WfZ-kO-6Z9" firstAttribute="top" secondItem="2o9-LB-flV" secondAttribute="bottom" constant="7.5" id="OpX-jb-uvc"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="2UE-Gy-f9v" secondAttribute="trailing" constant="301" id="Tan-Cp-CLt"/>
                             <constraint firstAttribute="leadingMargin" secondItem="lrQ-bX-oCN" secondAttribute="leading" id="UNl-5H-17x"/>
                             <constraint firstItem="MNX-t8-RIr" firstAttribute="leading" secondItem="6So-MP-QxU" secondAttribute="leadingMargin" id="Vsx-n9-MQM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="HtR-Jj-KXh" secondAttribute="trailing" constant="10" id="YQX-qp-rDd"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="2UE-Gy-f9v" secondAttribute="leading" id="YXc-Zd-sgT"/>
                             <constraint firstItem="HtR-Jj-KXh" firstAttribute="leading" secondItem="lrQ-bX-oCN" secondAttribute="trailing" constant="9.5" id="ZBR-b9-tC9"/>
                             <constraint firstItem="2o9-LB-flV" firstAttribute="leading" secondItem="lrQ-bX-oCN" secondAttribute="trailing" constant="10" id="eay-dV-R6U"/>
                             <constraint firstItem="lrQ-bX-oCN" firstAttribute="top" secondItem="rkE-zR-3cL" secondAttribute="bottom" constant="8" id="es5-M6-KY0"/>

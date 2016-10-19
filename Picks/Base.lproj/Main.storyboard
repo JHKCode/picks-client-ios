@@ -85,6 +85,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="CXI-fL-seT"/>
                     <connections>
+                        <outlet property="pickSearchBar" destination="RoU-72-4Xh" id="iQj-9I-cUz"/>
                         <outlet property="tableView" destination="XmO-af-ukg" id="jDi-M2-Lpp"/>
                         <segue destination="uYH-Jq-Tcw" kind="showDetail" id="v8w-vL-eLR"/>
                     </connections>
@@ -115,9 +116,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MNX-t8-RIr">
-                                <state key="normal" title="Button"/>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WfZ-kO-6Z9">
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
@@ -128,22 +126,47 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="0.0" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="u1d-Vs-Dez">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="6xA-Pb-OLT"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="handleStarSlider:" destination="uYH-Jq-Tcw" eventType="valueChanged" id="imf-5t-OY6"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9LK-QI-8Ag">
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Write Something Here..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vk2-1F-DLH">
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="9LK-QI-8Ag" firstAttribute="leading" secondItem="u1d-Vs-Dez" secondAttribute="trailing" constant="20" id="5ln-fw-nMg"/>
                             <constraint firstItem="2o9-LB-flV" firstAttribute="width" secondItem="lrQ-bX-oCN" secondAttribute="width" multiplier="2" id="73j-2X-hL1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vk2-1F-DLH" secondAttribute="trailing" constant="10" id="DpH-eA-8qT"/>
+                            <constraint firstItem="DUk-Vg-xba" firstAttribute="top" secondItem="vk2-1F-DLH" secondAttribute="bottom" constant="20" id="KUV-Pl-pPy"/>
                             <constraint firstItem="WfZ-kO-6Z9" firstAttribute="top" secondItem="2o9-LB-flV" secondAttribute="bottom" constant="7.5" id="OpX-jb-uvc"/>
+                            <constraint firstItem="9LK-QI-8Ag" firstAttribute="trailing" secondItem="6So-MP-QxU" secondAttribute="trailingMargin" id="RSQ-ua-uUb"/>
                             <constraint firstAttribute="leadingMargin" secondItem="lrQ-bX-oCN" secondAttribute="leading" id="UNl-5H-17x"/>
-                            <constraint firstItem="MNX-t8-RIr" firstAttribute="leading" secondItem="6So-MP-QxU" secondAttribute="leadingMargin" id="Vsx-n9-MQM"/>
+                            <constraint firstItem="vk2-1F-DLH" firstAttribute="top" secondItem="u1d-Vs-Dez" secondAttribute="bottom" constant="20" id="X2R-gI-CEF"/>
                             <constraint firstAttribute="trailingMargin" secondItem="HtR-Jj-KXh" secondAttribute="trailing" constant="10" id="YQX-qp-rDd"/>
                             <constraint firstItem="HtR-Jj-KXh" firstAttribute="leading" secondItem="lrQ-bX-oCN" secondAttribute="trailing" constant="9.5" id="ZBR-b9-tC9"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="vk2-1F-DLH" secondAttribute="leading" id="eUy-lx-6lg"/>
                             <constraint firstItem="2o9-LB-flV" firstAttribute="leading" secondItem="lrQ-bX-oCN" secondAttribute="trailing" constant="10" id="eay-dV-R6U"/>
                             <constraint firstItem="lrQ-bX-oCN" firstAttribute="top" secondItem="rkE-zR-3cL" secondAttribute="bottom" constant="8" id="es5-M6-KY0"/>
                             <constraint firstItem="WfZ-kO-6Z9" firstAttribute="leading" secondItem="lrQ-bX-oCN" secondAttribute="trailing" constant="9.5" id="gcs-wR-O9k"/>
+                            <constraint firstItem="9LK-QI-8Ag" firstAttribute="centerY" secondItem="u1d-Vs-Dez" secondAttribute="centerY" id="joR-Qq-iaP"/>
+                            <constraint firstItem="u1d-Vs-Dez" firstAttribute="leading" secondItem="6So-MP-QxU" secondAttribute="leadingMargin" id="kLj-Zq-0Gg"/>
+                            <constraint firstItem="u1d-Vs-Dez" firstAttribute="top" relation="greaterThanOrEqual" secondItem="HtR-Jj-KXh" secondAttribute="bottom" constant="20" id="qk1-5o-ua9"/>
                             <constraint firstAttribute="trailingMargin" secondItem="2o9-LB-flV" secondAttribute="trailing" constant="10" id="s1y-dZ-gDj"/>
+                            <constraint firstItem="u1d-Vs-Dez" firstAttribute="top" secondItem="lrQ-bX-oCN" secondAttribute="bottom" priority="250" constant="20" id="sOR-LU-POl"/>
                             <constraint firstItem="HtR-Jj-KXh" firstAttribute="top" secondItem="WfZ-kO-6Z9" secondAttribute="bottom" constant="8" id="soY-BP-YnQ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="MNX-t8-RIr" secondAttribute="trailing" id="srN-Ti-iv2"/>
-                            <constraint firstItem="DUk-Vg-xba" firstAttribute="top" secondItem="MNX-t8-RIr" secondAttribute="bottom" constant="10" id="wPS-DZ-0QV"/>
                             <constraint firstItem="2o9-LB-flV" firstAttribute="top" secondItem="rkE-zR-3cL" secondAttribute="bottom" constant="8" id="xrU-bx-rUB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="WfZ-kO-6Z9" secondAttribute="trailing" constant="10" id="xzm-CU-ITB"/>
                         </constraints>
@@ -152,7 +175,11 @@
                         <outlet property="pickCreatorLabel" destination="WfZ-kO-6Z9" id="EHX-VP-dNP"/>
                         <outlet property="pickDateLabel" destination="HtR-Jj-KXh" id="00z-ww-tvn"/>
                         <outlet property="pickImageView" destination="lrQ-bX-oCN" id="Aef-3r-iTf"/>
+                        <outlet property="pickTextView" destination="vk2-1F-DLH" id="YgK-CV-Bfe"/>
+                        <outlet property="pickTextViewBottomConstraint" destination="KUV-Pl-pPy" id="nbz-NV-vcE"/>
                         <outlet property="pickTitleLabel" destination="2o9-LB-flV" id="m7h-B8-75r"/>
+                        <outlet property="starLabel" destination="9LK-QI-8Ag" id="cKB-LC-cjl"/>
+                        <outlet property="starSlider" destination="u1d-Vs-Dez" id="zon-mP-u1I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tkD-Ih-T3q" userLabel="First Responder" sceneMemberID="firstResponder"/>

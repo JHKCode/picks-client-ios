@@ -24,7 +24,8 @@ extension UIViewController {
 
 class HomeViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
-
+    @IBOutlet weak var pickSearchBar: UISearchBar!
+    
     let searchManager = SearchManager()
     
     deinit {
@@ -64,6 +65,8 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UITableViewData
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("Keyword: \(searchBar.text)")
+        
+        searchBar.resignFirstResponder()
         
         guard let keyword = searchBar.text, keyword.isEmpty == false else {
             return
@@ -114,5 +117,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UITableViewData
         self.navigationController?.pushViewController(savePickVC, animated: true)
         
         tableView.deselectRow(at: indexPath, animated: false)
+        
+        pickSearchBar.resignFirstResponder()
     }
 }

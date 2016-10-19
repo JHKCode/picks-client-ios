@@ -124,16 +124,20 @@ class SearchManager {
     static let SearchDidFinishNotificationName = NSNotification.Name(rawValue: "SearchDidFinish")
     
     var fetchAPI: FetchAPI?
+    
     var items = Array<PickItem>()
-//    var books = Array<Book>()
-//    var films = Array<Film>()
+    
     
     init () {
     }
     
     
-    func createPickItems<T: InitializableWithXML>(data: Data) -> Array<T>? {
-        guard let root = XMLDoc(data: data).rootElement else {
+    func createPickItems<T: InitializableWithXML>(data: Data?) -> Array<T>? {
+        guard let xmlData = data else {
+            return nil
+        }
+        
+        guard let root = XMLDoc(data: xmlData).rootElement else {
             return nil
         }
         
@@ -166,45 +170,48 @@ class SearchManager {
         // clear previous results
         self.items.removeAll()
         
+        let notifyDidFinish = {
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: SearchManager.SearchDidFinishNotificationName, object: self)
+            }
+        }
+        
+        
         if category == "Book" {
             fetchAPI = SearchBookAPI(keyword: keyword)
-            fetchAPI?.completionHandler = { (data: Data?, error: Error?) in
-                if data == nil || data?.count == 0 {
+            fetchAPI?.completionHandler = { (error: Error?) in
+                if let fetchError = error {
+                    print("\(fetchError)")
                     return
                 }
                 
-                
-                if let searchItems: Array<Book> = self.createPickItems(data: data!) {
+                if let searchItems: Array<Book> = self.createPickItems(data: self.fetchAPI?.data) {
                     self.items = searchItems
                 }
                 
-                
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: SearchManager.SearchDidFinishNotificationName, object: self)
-                }
+                notifyDidFinish()
             }
         }
         else {
             fetchAPI = SearchFilmAPI(keyword: keyword)
-            fetchAPI?.completionHandler = { (data: Data?, error: Error?) in
-                if data == nil || data?.count == 0 {
+            fetchAPI?.completionHandler = { (error: Error?) in
+                if let fetchError = error {
+                    print("\(fetchError)")
                     return
                 }
                 
-                
-                if let searchItems: Array<Film> = self.createPickItems(data: data!) {
+                if let searchItems: Array<Film> = self.createPickItems(data: self.fetchAPI?.data) {
                     self.items = searchItems
                 }
                 
-                
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: SearchManager.SearchDidFinishNotificationName, object: self)
-                }
+                notifyDidFinish()
             }
         }
+
         
-        
-        _ = fetchAPI?.fetch()
+        if fetchAPI?.fetch() == false {
+            print("fetch fail")
+        }
     }
 }
 
